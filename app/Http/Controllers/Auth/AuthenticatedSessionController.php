@@ -18,6 +18,14 @@ class AuthenticatedSessionController extends Controller
     {
         return view('auth.login');
     }
+    protected function authenticated(Request $request, $user)
+    {
+        if ($user->role === 'admin') {
+            return redirect('/admin');
+        }
+
+        return redirect('/client');
+    }
 
     /**
      * Handle an incoming authentication request.
